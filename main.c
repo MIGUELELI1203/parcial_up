@@ -27,17 +27,17 @@ void main(void) {
     uart_init(115200); // Initialize UART
 
     emu_gpio_write_port(sw_value);
-
+    
     // Convertir el valor a string y mostrarlo
     uint32_to_hex_string(sw_value, wr_buffer);
     uart_puts("GPIO State: 0x");
     uart_puts(wr_buffer);
     uart_puts("\n\r");
-
+    
     uart_puts("Press u key to increment the counter\n");
     uart_puts("Press d key to decrement the counter\n");
     uart_puts("Press cntrl+a c to exit qemu\n");
-
+    
     while (1) {
         while (uart_tstc())  // Check if data is available
         {
@@ -54,7 +54,7 @@ void main(void) {
                 sw_value = 0xFF;
             }
             emu_gpio_write_port(sw_value);  // Write to LEDs
-
+            
             // Convertir el valor a string y mostrarlo
             uint32_to_hex_string((uint8_t)sw_value, wr_buffer);
             uart_puts("GPIO State: 0x");
